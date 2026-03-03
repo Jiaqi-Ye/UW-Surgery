@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
   const configs = Array.isArray(body?.configs) ? body.configs : [];
 
   const updates = configs
-    .filter((item: { key?: string }) => item?.key && APP_CONFIG_KEYS.includes(item.key))
+    .filter((item: { key?: string }) => item?.key && (APP_CONFIG_KEYS as readonly string[]).includes(item.key))
     .map((item: { key: string; value: string }) =>
       prisma.appConfig.upsert({
         where: { key: item.key },

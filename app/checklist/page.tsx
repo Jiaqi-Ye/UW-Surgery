@@ -114,7 +114,7 @@ export default function ChecklistPage() {
             >
               <div>
                 <div>{item.label}</div>
-                {item.due_date && <div className="text-xs text-muted">Due: {item.due_date}</div>}
+                {(item as any).due_date && <div className="text-xs text-muted">Due: {(item as any).due_date}</div>}
               </div>
               <span className="badge">{item.status.replace('_', ' ')}</span>
             </li>
@@ -128,8 +128,8 @@ export default function ChecklistPage() {
           <ul className="mt-4 list-disc pl-5 text-muted">
             {(assistantTurn.ui_cards.find((card) => card.type === 'questions_to_ask')?.content.questions ??
               []).map((question) => (
-              <li key={question}>{question}</li>
-            ))}
+                <li key={question}>{question}</li>
+              ))}
           </ul>
         </section>
       )}

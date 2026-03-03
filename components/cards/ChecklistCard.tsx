@@ -35,7 +35,7 @@ export default function ChecklistCard({ items }: { items: ChecklistItem[] }) {
     setStatusMap((prev) => {
       const updated = { ...prev, [item.id]: nextStatus };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-      return updated;
+      return updated as Record<string, ChecklistItem['status']>;
     });
   };
 
@@ -57,11 +57,10 @@ export default function ChecklistCard({ items }: { items: ChecklistItem[] }) {
               </div>
               <button
                 onClick={() => updateStatus(item)}
-                className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                  currentStatus === 'done'
+                className={`rounded-full px-3 py-1 text-xs font-semibold ${currentStatus === 'done'
                     ? 'bg-moss text-white'
                     : 'border border-moss text-moss'
-                }`}
+                  }`}
               >
                 {currentStatus === 'done' ? 'Completed' : 'Mark done'}
               </button>
